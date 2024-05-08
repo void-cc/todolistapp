@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta charset="UTF-8">
+    <title>To Do</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: lightsalmon;
+        }
+
+        nav li {
+            float: left;
+        }
+
+        nav li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        #todo-list {
+            margin: 20px;
+            padding: 20px;
+            border-style: solid;
+            border-color: gray;
+            border-width: 2px;
+            border-radius: 25px;
+        }
+
+        .todo-text {
+            display: inline;
+            justify-content: left;
+
+        }
+
+        .soft-border {
+            border-style: solid;
+            border-color: lightgray;
+            border-width: 2px;
+        }
+
+        .todo-item {
+            padding: 6px;
+            margin: 6px;
+            justify-content: left;
+        }
+        .todo-delete {
+            position: absolute;
+            right: 60px;
+            background-color: transparent;
+            border: none;
+            color: grey;
+        }
+
+        .todo-delete:hover {
+            color: red;
+        }
+
+        .todo-done {
+            border-radius: 500px;
+            background-color: transparent;
+            border-style: solid;
+            border-color: gray;
+            border-width: 4px;
+            height: 20px;
+            width: 20px;
+        }
+
+        .todo-done:hover {
+            background-color: rgb(179, 253, 232);
+            border-color: #9a9a9a;
+        }
+
+        .add-todo {
+
+            margin-left: 1%;
+            padding-top: 10px;
+            padding: 5px;
+
+            padding-left: 20px;
+            width: 95%;
+            height: 40px;
+            border-width: 3px;
+            border-style: solid;
+            border-color: lightgray;
+            border-radius: 30px;
+        }
+
+        #toevoegen-todo {
+
+            height: 35px;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/">Todo</a></li>
+            <li><a href="/">agenda</a></li>
+            <li style="float: right"><a href="/account">account</a></li>
+        </ul>
+    </nav>
+    <h1>To Do</h1>
+    <div class="add-todo">
+        <form method="POST">
+            <input type="text" id="toevoegen-todo" name="toevoegen" placeholder="pyweb maken">
+            <input type="date" id="toevoegen-todo-date" name="toevoegen-date">
+            <input id='toevoegeb-todo-button' type="submit" value="OK">
+        </form>
+    </div>
+    <div id="todo-list">
+    <form method="POST">
+    {% for todo in todolist %}
+        <div class="todo-item soft-border">
+            <button type="submit" class="todo-done" name="todo-done" value="{{ loop.index }}"></button>
+            <p class="todo-text">{{ todo }}</p>
+            <button type="submit" class="todo-delete fa fa-trash-o" name="todo-delete" value="{{ loop.index }}"></button>
+        </div>
+
+    {% endfor %}
+    </form>
+    <form method="POST">
+    {% for todo in todolistdone %}
+        <div class="todo-item soft-border">
+            <button type="submit" class="todo-done" name="todo-done-back" value="{{ loop.index }}"></button>
+            <s><p class="todo-text">{{ todo }}</p></s>
+            <button type="submit" class="todo-delete fa fa-trash-o" name="todo-done-delete" value="{{ loop.index }}"></button>
+        </div>
+
+    {% endfor %}
+    </form>
+    </div>
+</body>
+</html>
