@@ -102,6 +102,10 @@
             height: 35px;
             border: none;
         }
+
+        .text-red {
+            color: red;
+        }
     </style>
 </head>
 <body>
@@ -125,7 +129,12 @@
     {% for todo in todolist %}
         <div class="todo-item soft-border">
             <button type="submit" class="todo-done" name="todo-done" value="{{ loop.index }}"></button>
-            <p class="todo-text">{{ todo }}</p>
+            <p class="todo-text">{{ todo.todo_text }}</p>
+            {% if todo.todo_date_overdue %}
+            <p class="todo-text text-red">{{ todo.todo_date }}</p>
+            {% else %}
+            <p class="todo-text">{{ todo.todo_date }}</p>
+            {% endif %}
             <button type="submit" class="todo-delete fa fa-trash-o" name="todo-delete" value="{{ loop.index }}"></button>
         </div>
 
