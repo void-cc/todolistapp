@@ -8,12 +8,19 @@
 </head>
 <body>
     <div class="container">
-        <h1>Todo List</h1>
-        <div class="add-todo">
+        <header>
+            <h1>Todo List</h1>
+            <a href="/logout" class="logout-btn">Logout</a>
+        </header>
+        <div class="add-todo-form">
             <input type="text" id="todo-input" placeholder="Add a new todo...">
+            <input type="date" id="todo-date">
+            <input type="text" id="todo-tags" placeholder="Tags (comma-separated)">
             <button id="add-btn">Add</button>
         </div>
-        <ul id="todo-list"></ul>
+        <ul id="todo-list">
+            <!-- Todo items will be dynamically inserted here -->
+        </ul>
     </div>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>

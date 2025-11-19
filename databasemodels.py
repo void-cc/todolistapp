@@ -60,6 +60,7 @@ class TodoList(Base):
     todo_date = mapped_column(DateTime)
     todo_date_overdue = mapped_column(Boolean)
     todo_done = mapped_column(Boolean)
+    tags: Mapped[Optional[str]] = mapped_column(String(255))
 
     user_id = mapped_column(Integer)
 
@@ -70,4 +71,5 @@ class TodoList(Base):
                 f"todo_made_time={self.todo_made_time!r}, "
                 f"todo_date={self.todo_date},"
                 f"todo_date_overdue={self.todo_date_overdue},"
-                f"todo_done={self.todo_done})")
+                f"todo_done={self.todo_done},"
+                f"tags={self.tags!r})")
