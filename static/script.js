@@ -37,19 +37,58 @@ document.addEventListener('DOMContentLoaded', () => {
                 li.classList.add('completed');
             }
 
-            const tagsHTML = todo.tags ? todo.tags.split(',').map(tag => `<span class="tag">${tag.trim()}</span>`).join('') : '';
+            // Create todo-content div
+            const todoContentDiv = document.createElement('div');
+            todoContentDiv.className = 'todo-content';
 
-            li.innerHTML = `
-                <div class="todo-content">
-                    <input type="checkbox" ${todo.todo_done ? 'checked' : ''}>
-                    <span class="text">${todo.todo_text}</span>
-                </div>
-                <div class="todo-meta">
-                    ${todo.todo_date ? `<span class="due-date">${new Date(todo.todo_date).toLocaleDateString()}</span>` : ''}
-                    <div class="tags-container">${tagsHTML}</div>
-                </div>
-                <button class="delete-btn">Delete</button>
-            `;
+            // Checkbox
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            if (todo.todo_done) {
+                checkbox.checked = true;
+            }
+            todoContentDiv.appendChild(checkbox);
+
+            // Todo text
+            const textSpan = document.createElement('span');
+            textSpan.className = 'text';
+            textSpan.textContent = todo.todo_text;
+            todoContentDiv.appendChild(textSpan);
+
+            // Create todo-meta div
+            const todoMetaDiv = document.createElement('div');
+            todoMetaDiv.className = 'todo-meta';
+
+            // Due date
+            if (todo.todo_date) {
+                const dueDateSpan = document.createElement('span');
+                dueDateSpan.className = 'due-date';
+                dueDateSpan.textContent = new Date(todo.todo_date).toLocaleDateString();
+                todoMetaDiv.appendChild(dueDateSpan);
+            }
+
+            // Tags
+            const tagsContainer = document.createElement('div');
+            tagsContainer.className = 'tags-container';
+            if (todo.tags) {
+                todo.tags.split(',').forEach(tag => {
+                    const tagSpan = document.createElement('span');
+                    tagSpan.className = 'tag';
+                    tagSpan.textContent = tag.trim();
+                    tagsContainer.appendChild(tagSpan);
+                });
+            }
+            todoMetaDiv.appendChild(tagsContainer);
+
+            // Delete button
+            const deleteBtn = document.createElement('button');
+            deleteBtn.className = 'delete-btn';
+            deleteBtn.textContent = 'Delete';
+
+            // Assemble
+            li.appendChild(todoContentDiv);
+            li.appendChild(todoMetaDiv);
+            li.appendChild(deleteBtn);
             todoList.appendChild(li);
         });
     };
